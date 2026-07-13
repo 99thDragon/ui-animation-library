@@ -1,0 +1,37 @@
+/* ============================================================
+   THE "ACETATE" — the site-wide signature effect
+   ------------------------------------------------------------
+   Their literal CSS:
+     .acetate { background-color: red; inset: 0;
+                mix-blend-mode: multiply; position: absolute; }
+
+   A red plate multiplied over media = the red acetate cel
+   sheets used in traditional animation studios. It appears on:
+   - the home hero (peels away as you scroll)
+   - video players (tints the poster until you press play)
+   - featured-work hover states
+   - even the 404 page
+
+   Multiply keeps the luminance of the image but forces the
+   hue — that's why it looks like a printed film gel and not
+   just a translucent red div.
+   ============================================================ */
+
+.acetate {
+  position: absolute;
+  inset: 0;
+  background-color: var(--red, #FF391E);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* host element must establish a stacking context */
+.acetate-host {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;    /* keeps multiply from leaking to the page bg */
+}
+
+/* hover variant: tint fades off when you hover the media */
+.acetate--hover { transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+.acetate-host:hover .acetate--hover { opacity: 0; }

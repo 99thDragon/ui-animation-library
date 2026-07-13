@@ -1,0 +1,87 @@
+# UI Animation Library
+
+Twelve UI/animation patterns reverse-engineered from the full **[thelinestudio.com](https://thelinestudio.com)** site — Work, Home, About, case studies, Contact, Podcast (design: Isaac Powell, dev: Thomas Aufresne) — rebuilt in vanilla HTML/CSS/JS.
+
+## Quick start
+
+Open `index.html` in your browser — it links to all seven demos. No build step, no install. (Internet needed: GSAP/Lenis load from CDN, placeholder images from picsum.photos.)
+
+## What's inside
+
+```
+ui-animation-library/
+├── index.html                  hub page linking every demo
+├── lib/                        ← the reusable library
+│   ├── tokens.css              design tokens: palette, easing, type, motifs
+│   ├── preloader.js            FpsPreloader — "00/24 fps" loading counter
+│   ├── cursor.js + cursor.css  StickyCursor — trailing cursor w/ label + thumb
+│   ├── split-lines.js          splitLines()/revealLines() — masked line reveals
+│   ├── lazy-video.js           initHoverVideos() — hover-to-play, lazy src
+│   ├── flip-layout.js          LayoutToggle — grid ⇄ list FLIP morph
+│   ├── smooth-scroll.js        initSmoothScroll() — Lenis + custom scrollbar
+│   ├── acetate.css             the red mix-blend-mode:multiply "cel sheet"
+│   ├── carousel-cursor.js      CursorCarousel — click-to-cycle image stack
+│   ├── clock.js                StudioClock — live OPEN/CLOSED office hours
+│   ├── equalizer.js            SoundEqualizer — dancing scaleY audio bars
+│   └── nav-overlay.js          FullscreenNav — panel wipe + staggered items
+└── demos/                      ← one runnable page per pattern
+    ├── 01-preloader.html
+    ├── 02-cursor.html
+    ├── 03-grid-list-flip.html
+    ├── 04-hover-video.html
+    ├── 05-split-text.html
+    ├── 06-loading-blocks.html
+    ├── 07-smooth-scroll.html
+    ├── 08-acetate-hero.html
+    ├── 09-cursor-carousel.html
+    ├── 10-studio-clock.html
+    ├── 11-equalizer.html
+    └── 12-fullscreen-nav.html
+```
+
+## Why the original site feels so good — the analysis
+
+**Their stack** (extracted from the live bundle): Nuxt 3 (Vue) + DatoCMS, **GSAP** with ScrollTrigger / SplitText / Flip / CustomEase, and **Lenis** smooth scroll. Easings found in the code: `power4.out`, `power2.out`, `power1.inOut`.
+
+The quality comes from five principles, not from any single trick:
+
+1. **One motion language.** The same 2–3 easing curves and durations everywhere. `power4.out` = fast start, long silky landing — the "luxury" curve. When every element obeys the same physics, the site feels like one object.
+2. **Smooth scroll is the foundation.** Lenis lerps the scroll position, so every scroll-linked animation interpolates instead of stepping. Half the perceived quality of every scroll effect comes from this alone.
+3. **Loading states are designed moments.** The preloader is a 24fps film joke. Unloaded images are solid brand-red plates (`#FF391E`), not grey skeletons. Nothing ever looks broken.
+4. **Restraint in the palette, extravagance in the motion.** Three colors (grey `#DDDEE2`, ink `#0B0B0B`, red `#FF391E`), one typeface (Denim variable font), UPPERCASE + `/` slash motifs. Because the canvas is so strict, the animation reads as craft instead of noise.
+5. **Performance discipline enables the flash.** 31 videos on one page, but none has a `src` until needed (`preload="metadata"` + lazy attach). Transforms and opacity only — nothing that triggers layout. Silky comes from cheap.
+
+### Pattern-by-pattern notes
+
+| # | Pattern | The key detail |
+|---|---------|----------------|
+| 01 | FPS preloader | Counter tween AND `window.load` must both finish; exit is a full-screen `power4.inOut` wipe |
+| 02 | Custom cursor | `gsap.quickTo` with 0.5s duration = the trailing lag; thumb enters with `translateY(10%) rotate(2deg)` (their literal CSS) |
+| 03 | Grid ⇄ List | GSAP Flip: snapshot → toggle a CSS class → animate the diff. `absolute: true` + 0.02s stagger |
+| 04 | Hover video | `muted loop playsinline preload="metadata"`, src attached on first approach/hover, poster crossfade + 1s scale(1.04) breathe |
+| 05 | Split text | Mask (`overflow:hidden`) per line; line starts at `yPercent: 110`, rises with `power4.out`, 0.08s stagger |
+| 06 | Loading blocks | `::before` red plate, `transition: opacity 0.2s 0.3s` — the 0.3s delay makes even instant loads flash the brand color |
+| 07 | Smooth scroll | Lenis duration 1.1 + expo-out easing; custom scrollbar handle synced to `progress`; parallax = `scrub: true` inside an overflow-hidden frame |
+| 08 | Acetate hero | Their literal CSS: `.acetate { background: red; mix-blend-mode: multiply; inset: 0 }` — a digital animation-cel sheet. Hero = 300vh scroller + `position: sticky` child; scrubbed ScrollTrigger peels the plate with `transform-origin: 0% 100%` |
+| 09 | Cursor carousel | Whole image is the button; click advances via `clip-path: inset()` wipe; upcoming slides trail the cursor as thumbnails (`gsap.quickTo`) |
+| 10 | Studio clock | Header shows live "OPEN/CLOSED (10—6PM)" via `Intl.DateTimeFormat` in Europe/London; the red dot blinks with their actual keyframe name: `@keyframes blink182 { 50% { visibility: hidden } }` |
+| 11 | Sound equalizer | Podcast page: thin bars animated with `transform: scaleY()` origin-bottom (never `height` — no layout thrash), randomized every ~120ms, smoothed by a CSS transition |
+| 12 | Fullscreen nav | Ink panel slides down `power4.inOut`, then ● dot + LABEL + red `/` items cascade with 0.06s stagger — one overlapped timeline so it reads as a single gesture |
+
+## Using a module in your own project
+
+Every `lib/` file is a plain script (no build tools). Example — split-text:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="lib/split-lines.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  revealLines(document.querySelector('h1'));
+</script>
+```
+
+## Credits & license note
+
+These are educational reconstructions of publicly visible techniques, written from scratch — no code was copied from the site. The design language (colors, motifs) is used here for study; swap in your own tokens for production work. GSAP and Lenis are free to use (GSAP became 100% free in 2025, including SplitText/Flip).

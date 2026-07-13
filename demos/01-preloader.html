@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 — FPS Preloader</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  /* full-screen ink panel with a huge counter */
+  .preloader {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.15em;
+  }
+  .preloader__count {
+    font-size: clamp(80px, 18vw, 240px);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;  /* digits don't jiggle */
+    line-height: 1;
+  }
+  .preloader__total {
+    font-size: clamp(16px, 3vw, 32px);
+    color: var(--red);
+    align-self: flex-end;
+    padding-bottom: 1.2em;
+  }
+
+  /* the page revealed underneath */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 9vw, 130px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--red); font-style: normal; }
+</style>
+</head>
+<body>
+
+  <div class="preloader">
+    <span class="preloader__count">00</span>
+    <span class="preloader__total">/ 24 fps</span>
+  </div>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>01 <em class="slash"></em> FPS Preloader</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main class="hero">
+    <h1>Loading as<br><em>brand story</em></h1>
+    <p style="max-width: 420px; margin-top: 24px;">
+      Film runs at 24 frames per second — so an animation studio counts its
+      preloader from 00 to 24 "fps". The counter uses a steady mechanical ease
+      (like a projector), then the panel exits with a long
+      <code>power4.inOut</code> wipe. Refresh to replay.
+    </p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="../lib/preloader.js"></script>
+  <script>
+    new FpsPreloader(document.querySelector('.preloader'), {
+      onComplete: () => {
+        // Reveal the hero title after the wipe — chained motion
+        gsap.from('.hero h1', { yPercent: 30, opacity: 0, duration: 1, ease: 'power4.out' });
+      }
+    });
+  </script>
+</body>
+</html>

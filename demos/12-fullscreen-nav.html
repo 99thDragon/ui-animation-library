@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 — Fullscreen Nav Overlay</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { max-width: 800px; margin: 0 auto; padding: 12vh 24px; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); max-width: 480px; }
+
+  .menu-btn {
+    position: fixed; top: 16px; right: 24px; z-index: 1000;
+    text-transform: uppercase; font-size: 12px; letter-spacing: 0.08em;
+    padding: 10px 16px;
+    background: var(--ink); color: var(--bg);
+    transition: background 0.3s;
+  }
+  .menu-btn:hover { background: var(--red); }
+  .menu-btn.is-open { background: var(--red); color: var(--ink); }
+  .menu-btn::before { content: "Menu"; }
+  .menu-btn.is-open::before { content: "Close"; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>12 <em class="slash"></em> Fullscreen Nav</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"></button>
+
+  <main>
+    <h1>The menu is a moment</h1>
+    <p class="hint">Their nav items are ● dot + LABEL + trailing red slash, and
+       they cascade in behind a panel that slides down with
+       <code>power4.inOut</code>. One timeline, overlapped, so the whole thing
+       reads as a single gesture. Hit the Menu button.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="../lib/nav-overlay.js"></script>
+  <script>
+    new FullscreenNav({
+      toggle: '#menuBtn',
+      links: [
+        { label: 'Home', href: '#' },
+        { label: 'Work', href: '#' },
+        { label: 'Entertainment', href: '#' },
+        { label: 'About', href: '#' },
+        { label: 'Podcast', href: '#' },
+        { label: 'Contact', href: '#' },
+      ],
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/* ============================================================
+   DESIGN TOKENS — extracted from thelinestudio.com
+   One tiny palette + one motion language = the "expensive" feel.
+   ============================================================ */
+:root {
+  /* Palette (measured from the live site) */
+  --bg:     #DDDEE2;   /* cool light grey body background        */
+  --ink:    #0B0B0B;   /* near-black text                        */
+  --red:    #FF391E;   /* the single loud accent (rgb 255,57,30) */
+  --grey:   #9A9BA0;   /* muted secondary text                   */
+
+  /* Motion — their whole site uses these few curves */
+  --ease-out:     cubic-bezier(0.19, 1, 0.22, 1);   /* ~ gsap power4.out  */
+  --ease-in-out:  cubic-bezier(0.77, 0, 0.175, 1);  /* ~ gsap power3.inOut*/
+  --dur-fast:  0.3s;
+  --dur-med:   0.6s;
+  --dur-slow:  1.0s;
+
+  /* Type — they use one variable font (Denim). We approximate. */
+  --font: "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
+}
+
+/* ---- minimal reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ---- recurring Line Studio motifs ---- */
+.ttu   { text-transform: uppercase; }
+.small { font-size: 11px; letter-spacing: 0.04em; }
+
+/* red dot ● used before every meta label */
+.dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* the " / " slash separator motif */
+.slash::after {
+  content: "/";
+  margin: 0 0.5em;
+  color: var(--red);
+  font-style: normal;
+}
+
+/* page header used across demos */
+.demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px 24px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+.demo-header a { text-decoration: none; }
+.demo-header a:hover { color: var(--red); }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 — Lenis Smooth Scroll + Custom Scrollbar</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+  section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+  h1, h2 { text-transform: uppercase; font-size: clamp(32px, 6vw, 72px); line-height: 1; }
+  .num { color: var(--red); font-size: 12px; margin-bottom: 12px; }
+
+  /* parallax figure — moves slower than the page */
+  .para {
+    width: min(70%, 560px);
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    margin-top: 32px;
+  }
+  .para img { width: 100%; height: 130%; object-fit: cover; will-change: transform; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>07 <em class="slash"></em> Smooth Scroll</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <section>
+      <p class="num">01 / 04</p>
+      <h1>Scroll me with your wheel</h1>
+      <p style="max-width:420px;margin-top:16px;color:var(--grey)">
+        Lenis converts stepped wheel input into an inertia-smoothed glide.
+        Note the custom scrollbar on the right — hover it, click the track.
+      </p>
+    </section>
+
+    <section>
+      <p class="num">02 / 04</p>
+      <h2>Everything interpolates</h2>
+      <div class="para"><img data-parallax src="https://picsum.photos/seed/lenis1/900/700" alt=""></div>
+    </section>
+
+    <section>
+      <p class="num">03 / 04</p>
+      <h2>Parallax comes free</h2>
+      <div class="para" style="margin-left:auto"><img data-parallax src="https://picsum.photos/seed/lenis2/900/700" alt=""></div>
+    </section>
+
+    <section>
+      <p class="num">04 / 04</p>
+      <h2>The end <em style="color:var(--red);font-style:normal">/</em> scroll up</h2>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="../lib/smooth-scroll.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    initSmoothScroll();
+
+    // simple parallax: image slides inside its overflow-hidden frame
+    document.querySelectorAll('[data-parallax]').forEach(img => {
+      gsap.fromTo(img, { yPercent: -12 }, {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: img, scrub: true },
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 — Color-Block Image Loading</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     THE PATTERN — their exact CSS was:
+     .bg-loading .base-image::before {
+       background-color: rgb(255, 57, 30);
+       content: ""; inset: 0; position: absolute;
+       transition: opacity 0.2s 0.3s;
+     }
+     A solid brand-red plate covers the image slot. When the
+     image loads we drop the class and the plate fades, with a
+     0.3s delay so fast loads still flash the brand color.
+     ============================================================ */
+  .plate {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .plate::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--red);
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.2s 0.3s;   /* fade 0.2s, AFTER 0.3s hold */
+  }
+  .plate.is-loaded::before { opacity: 0; }
+
+  .plate img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.08);
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .plate.is-loaded img { transform: scale(1); }  /* settle-in zoom */
+
+  .replay { margin-top: 32px; background: var(--ink); color: var(--bg);
+            padding: 10px 18px; text-transform: uppercase; font-size: 11px;
+            letter-spacing: 0.05em; }
+  .replay:hover { background: var(--red); }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>06 <em class="slash"></em> Loading Blocks</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1 class="ttu" style="font-size: clamp(28px,5vw,56px)">Loading states as design</h1>
+    <p style="max-width: 460px; color: var(--grey); margin-top: 8px;">
+      Instead of grey skeletons, every unloaded image is a solid brand-red
+      plate that fades out when the pixels arrive.
+    </p>
+
+    <div class="grid" id="grid"></div>
+    <button class="replay" id="replay">↻ Replay loading</button>
+  </main>
+
+  <script>
+    const grid = document.getElementById('grid');
+
+    function build() {
+      grid.innerHTML = '';
+      for (let i = 0; i < 6; i++) {
+        const fig = document.createElement('figure');
+        fig.className = 'plate';
+        const img = document.createElement('img');
+        img.alt = '';
+        // stagger the reveals a little so the grid "pops" in sequence
+        img.addEventListener('load', () => {
+          setTimeout(() => fig.classList.add('is-loaded'), i * 120);
+        });
+        // cache-buster so Replay actually re-downloads
+        img.src = `https://picsum.photos/seed/plate${i}-${Date.now()}/640/480`;
+        fig.appendChild(img);
+        grid.appendChild(fig);
+      }
+    }
+
+    document.getElementById('replay').addEventListener('click', build);
+    build();
+  </script>
+</body>
+</html>

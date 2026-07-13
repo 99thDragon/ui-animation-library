@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 — Sound Equalizer Bars</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  body { background: var(--ink); color: var(--bg); }
+  main { max-width: 800px; margin: 0 auto; padding: 12vh 24px; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 56px; max-width: 480px; }
+
+  .ep {
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    padding: 22px 8px;
+    border-top: 1px solid rgba(221,222,226,0.2);
+    cursor: pointer;
+    transition: color 0.3s, padding-left 0.4s cubic-bezier(0.19,1,0.22,1);
+  }
+  .ep:last-of-type { border-bottom: 1px solid rgba(221,222,226,0.2); }
+  .ep:hover { color: var(--red); padding-left: 16px; }
+  .ep__title { text-transform: uppercase; font-weight: 600; font-size: clamp(16px, 2.6vw, 24px); flex: 1; }
+  .ep__num { color: var(--red); font-size: 11px; width: 48px; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>11 <em class="slash"></em> Equalizer</span>
+    <a href="../index.html" style="color:var(--bg)">← Library</a>
+  </header>
+
+  <main>
+    <h1>Bars that dance on hover</h1>
+    <p class="hint">From their podcast page ("Ear Candy"). A row of thin bars
+       animated with <code>transform: scaleY()</code> from origin bottom —
+       transform only, so it never triggers layout. Hover an episode row.</p>
+
+    <div class="ep"><span class="ep__num">EP 01 /</span><span class="ep__title">Drawing the Line</span><span class="eq"></span></div>
+    <div class="ep"><span class="ep__num">EP 02 /</span><span class="ep__title">24 Frames of Truth</span><span class="eq"></span></div>
+    <div class="ep"><span class="ep__num">EP 03 /</span><span class="ep__title">Sakuga Explained</span><span class="eq"></span></div>
+    <div class="ep"><span class="ep__num">EP 04 /</span><span class="ep__title">The Cel Count</span><span class="eq"></span></div>
+  </main>
+
+  <script src="../lib/equalizer.js"></script>
+  <script>
+    document.querySelectorAll('.ep').forEach(row => {
+      const eq = new SoundEqualizer(row.querySelector('.eq'), { bars: 12, hoverToggle: false });
+      row.addEventListener('mouseenter', () => eq.start());
+      row.addEventListener('mouseleave', () => eq.stop());
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* Custom cursor — companion to cursor.js */
+
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 9999;
+  pointer-events: none;          /* never block clicks */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  will-change: transform;
+}
+
+/* small red dot that is always visible */
+.cursor__dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--red, #FF391E);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* label pill — appears on [data-cursor-label] hover */
+.cursor__label {
+  background: var(--ink, #0B0B0B);
+  color: var(--bg, #DDDEE2);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 6px 10px;
+  transform: translateY(14px) scale(0);
+  transform-origin: left top;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.cursor--active .cursor__label { transform: translateY(14px) scale(1); }
+.cursor--active .cursor__dot   { transform: translate(-50%, -50%) scale(1.6); }
+
+/* media thumb — appears on [data-cursor-media] hover */
+.cursor__media {
+  position: absolute;
+  left: 24px; top: 24px;
+  width: 220px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  display: none;
+}
+.cursor--media .cursor__media { display: block; }
+.cursor__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* hide the OS cursor only where the custom one takes over */
+[data-cursor-label], [data-cursor-label] * { cursor: none; }

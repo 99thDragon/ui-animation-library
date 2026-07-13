@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 — Custom Cursor</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/cursor.css">
+<style>
+  main { padding: 10vh 24px; max-width: 900px; margin: 0 auto; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 48px; }
+
+  /* list rows like their LIST view */
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 22px 8px;
+    border-top: 1px solid rgba(11,11,11,0.2);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: padding-left 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+                color 0.3s;
+  }
+  .row:last-of-type { border-bottom: 1px solid rgba(11,11,11,0.2); }
+  .row:hover { padding-left: 24px; color: var(--red); }
+  .row__title { font-size: clamp(18px, 3vw, 30px); font-weight: 600; }
+  .row__meta { font-size: 11px; color: var(--grey); }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>02 <em class="slash"></em> Custom Cursor</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1>Cursor with a payload</h1>
+    <p class="hint">Hover the rows — the cursor trails with lag, grows a label,
+       and carries a thumbnail that enters with translateY + 2° rotation.</p>
+
+    <a class="row" href="#" data-cursor-label="View case study"
+       data-cursor-media="https://picsum.photos/seed/line1/440/248">
+      <span class="row__title">Jade Shadows</span>
+      <span class="row__meta"><span class="dot"></span>Director / L. S. Karnas</span>
+    </a>
+    <a class="row" href="#" data-cursor-label="View case study"
+       data-cursor-media="https://picsum.photos/seed/line2/440/248">
+      <span class="row__title">The Mountain</span>
+      <span class="row__meta"><span class="dot"></span>Director / Max Taylor</span>
+    </a>
+    <a class="row" href="#" data-cursor-label="View case study"
+       data-cursor-media="https://picsum.photos/seed/line3/440/248">
+      <span class="row__title">Cowboy Bebop</span>
+      <span class="row__meta"><span class="dot"></span>Director / Wesley Louis</span>
+    </a>
+    <a class="row" href="#" data-cursor-label="Play reel"
+       data-cursor-media="https://picsum.photos/seed/line4/440/248">
+      <span class="row__title">Hades II</span>
+      <span class="row__meta"><span class="dot"></span>Director / L. S. Karnas</span>
+    </a>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="../lib/cursor.js"></script>
+  <script> new StickyCursor(); </script>
+</body>
+</html>

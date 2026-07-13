@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 — Studio Clock + Blink Dot</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { max-width: 800px; margin: 0 auto; padding: 12vh 24px; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 56px; max-width: 480px; }
+  .clock-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 8px; border-top: 1px solid rgba(11,11,11,0.2);
+  }
+  .clock-row:last-of-type { border-bottom: 1px solid rgba(11,11,11,0.2); }
+  .clock-row__city { text-transform: uppercase; font-weight: 600; font-size: 18px; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>10 <em class="slash"></em> Studio Clock</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1>A website with office hours</h1>
+    <p class="hint">Their header reads "CLOSED (10—6PM)" — live London studio
+       status with a blinking record-light dot (their CSS keyframe is literally
+       named <code>blink182</code>). Tiny detail, huge personality: the site
+       feels like a real place with people in it.</p>
+
+    <div class="clock-row">
+      <span class="clock-row__city">London</span>
+      <span class="studio-clock" data-tz="Europe/London"></span>
+    </div>
+    <div class="clock-row">
+      <span class="clock-row__city">New York</span>
+      <span class="studio-clock" data-tz="America/New_York"></span>
+    </div>
+    <div class="clock-row">
+      <span class="clock-row__city">Tokyo</span>
+      <span class="studio-clock" data-tz="Asia/Tokyo"></span>
+    </div>
+  </main>
+
+  <script src="../lib/clock.js"></script>
+  <script>
+    document.querySelectorAll('.studio-clock').forEach(el =>
+      new StudioClock(el, { timeZone: el.dataset.tz, open: 10, close: 18 }));
+  </script>
+</body>
+</html>

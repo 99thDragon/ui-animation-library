@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Animation Library — The Line Studio breakdown</title>
+<link rel="stylesheet" href="lib/tokens.css">
+<style>
+  main { max-width: 900px; margin: 0 auto; padding: 8vh 24px 15vh; }
+  h1 {
+    text-transform: uppercase;
+    font-size: clamp(34px, 7vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  h1 em { color: var(--red); font-style: normal; }
+  .sub { color: var(--grey); margin: 16px 0 56px; max-width: 480px; }
+
+  .index-row {
+    display: flex; align-items: baseline; gap: 16px;
+    padding: 18px 8px;
+    border-top: 1px solid rgba(11,11,11,0.2);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: padding-left 0.4s cubic-bezier(0.19,1,0.22,1), color 0.3s;
+  }
+  .index-row:last-of-type { border-bottom: 1px solid rgba(11,11,11,0.2); }
+  .index-row:hover { padding-left: 20px; color: var(--red); }
+  .index-row__num { font-size: 11px; color: var(--red); width: 40px; }
+  .index-row__name { font-size: clamp(16px, 2.6vw, 26px); font-weight: 600; flex: 1; }
+  .index-row__what { font-size: 11px; color: var(--grey); text-transform: none; }
+  footer { margin-top: 56px; font-size: 11px; color: var(--grey); text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>UI Animation<br><em>Library</em></h1>
+    <p class="sub">Twelve patterns reverse-engineered from the full
+      thelinestudio.com site — GSAP + Lenis + vanilla JS.
+      Each one is a runnable demo backed by a reusable module in <code>/lib</code>.</p>
+
+    <a class="index-row" href="demos/01-preloader.html">
+      <span class="index-row__num">01 /</span>
+      <span class="index-row__name">FPS Preloader</span>
+      <span class="index-row__what">counter as brand story, power4 exit wipe</span>
+    </a>
+    <a class="index-row" href="demos/02-cursor.html">
+      <span class="index-row__num">02 /</span>
+      <span class="index-row__name">Custom Cursor</span>
+      <span class="index-row__what">quickTo lag, label pill, media payload</span>
+    </a>
+    <a class="index-row" href="demos/03-grid-list-flip.html">
+      <span class="index-row__num">03 /</span>
+      <span class="index-row__name">Grid ⇄ List Morph</span>
+      <span class="index-row__what">GSAP Flip layout transition</span>
+    </a>
+    <a class="index-row" href="demos/04-hover-video.html">
+      <span class="index-row__num">04 /</span>
+      <span class="index-row__name">Hover Video Cards</span>
+      <span class="index-row__what">lazy src, poster crossfade, scale breathe</span>
+    </a>
+    <a class="index-row" href="demos/05-split-text.html">
+      <span class="index-row__num">05 /</span>
+      <span class="index-row__name">Split-Text Reveal</span>
+      <span class="index-row__what">masked lines rise on scroll, staggered</span>
+    </a>
+    <a class="index-row" href="demos/06-loading-blocks.html">
+      <span class="index-row__num">06 /</span>
+      <span class="index-row__name">Loading Color Blocks</span>
+      <span class="index-row__what">brand-red plates instead of skeletons</span>
+    </a>
+    <a class="index-row" href="demos/07-smooth-scroll.html">
+      <span class="index-row__num">07 /</span>
+      <span class="index-row__name">Smooth Scroll + Scrollbar</span>
+      <span class="index-row__what">Lenis glide, custom handle, parallax</span>
+    </a>
+    <a class="index-row" href="demos/08-acetate-hero.html">
+      <span class="index-row__num">08 /</span>
+      <span class="index-row__name">Acetate Scroll Hero</span>
+      <span class="index-row__what">red multiply plate, pinned scrub peel</span>
+    </a>
+    <a class="index-row" href="demos/09-cursor-carousel.html">
+      <span class="index-row__num">09 /</span>
+      <span class="index-row__name">Cursor Carousel</span>
+      <span class="index-row__what">click-to-cycle stack, thumbs trail cursor</span>
+    </a>
+    <a class="index-row" href="demos/10-studio-clock.html">
+      <span class="index-row__num">10 /</span>
+      <span class="index-row__name">Studio Clock</span>
+      <span class="index-row__what">live OPEN/CLOSED hours, blink182 dot</span>
+    </a>
+    <a class="index-row" href="demos/11-equalizer.html">
+      <span class="index-row__num">11 /</span>
+      <span class="index-row__name">Sound Equalizer</span>
+      <span class="index-row__what">scaleY bars dance on hover</span>
+    </a>
+    <a class="index-row" href="demos/12-fullscreen-nav.html">
+      <span class="index-row__num">12 /</span>
+      <span class="index-row__name">Fullscreen Nav</span>
+      <span class="index-row__what">panel wipe + staggered dot/slash items</span>
+    </a>
+
+    <footer>● Study of thelinestudio.com <em class="slash"></em> site design Isaac Powell <em class="slash"></em> dev Thomas Aufresne</footer>
+  </main>
+</body>
+</html>
