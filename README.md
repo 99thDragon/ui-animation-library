@@ -1,10 +1,10 @@
 # UI Animation Library
 
-Twelve UI/animation patterns reverse-engineered from the full **[thelinestudio.com](https://thelinestudio.com)** site — Work, Home, About, case studies, Contact, Podcast (design: Isaac Powell, dev: Thomas Aufresne) — rebuilt in vanilla HTML/CSS/JS.
+Fourteen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne) and **[dennissnellenberg.com](https://dennissnellenberg.com)** — rebuilt in vanilla HTML/CSS/JS.
 
 ## Quick start
 
-Open `index.html` in your browser — it links to all seven demos. No build step, no install. (Internet needed: GSAP/Lenis load from CDN, placeholder images from picsum.photos.)
+Open `index.html` in your browser — it links to every demo. No build step, no install. (Internet needed: GSAP/Lenis load from CDN, placeholder images from picsum.photos.)
 
 ## What's inside
 
@@ -23,7 +23,9 @@ ui-animation-library/
 │   ├── carousel-cursor.js      CursorCarousel — click-to-cycle image stack
 │   ├── clock.js                StudioClock — live OPEN/CLOSED office hours
 │   ├── equalizer.js            SoundEqualizer — dancing scaleY audio bars
-│   └── nav-overlay.js          FullscreenNav — panel wipe + staggered items
+│   ├── nav-overlay.js          FullscreenNav — panel wipe + staggered items
+│   ├── magnetic.js             Magnetic — two-layer cursor pull (Snellenberg)
+│   └── button-fill.js          initButtonFill() — cursor-origin fill (Snellenberg)
 └── demos/                      ← one runnable page per pattern
     ├── 01-preloader.html
     ├── 02-cursor.html
@@ -36,7 +38,8 @@ ui-animation-library/
     ├── 09-cursor-carousel.html
     ├── 10-studio-clock.html
     ├── 11-equalizer.html
-    └── 12-fullscreen-nav.html
+    ├── 12-fullscreen-nav.html
+    └── 13-magnetic-buttons.html
 ```
 
 ## Why the original site feels so good — the analysis
@@ -67,6 +70,8 @@ The quality comes from five principles, not from any single trick:
 | 10 | Studio clock | Header shows live "OPEN/CLOSED (10—6PM)" via `Intl.DateTimeFormat` in Europe/London; the red dot blinks with their actual keyframe name: `@keyframes blink182 { 50% { visibility: hidden } }` |
 | 11 | Sound equalizer | Podcast page: thin bars animated with `transform: scaleY()` origin-bottom (never `height` — no layout thrash), randomized every ~120ms, smoothed by a CSS transition |
 | 12 | Fullscreen nav | Ink panel slides down `power4.inOut`, then ● dot + LABEL + red `/` items cascade with 0.06s stagger — one overlapped timeline so it reads as a single gesture |
+| 13 | Magnetic buttons | *(dennissnellenberg.com)* Shell follows the cursor by `data-strength`; the label leads it by `data-strength-text` — two layers read as depth; `elastic.out` snaps it home on leave |
+| 14 | Button fill | *(dennissnellenberg.com)* A circle scaled from 0 grows past the button bounds from the cursor's entry point; the label flips to the bg color as it's engulfed |
 
 ## Using a module in your own project
 

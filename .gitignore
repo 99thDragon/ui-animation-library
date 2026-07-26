@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code (local-only settings)
+.claude/settings.local.json

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13 — Magnetic Buttons + Fill</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { padding: 10vh 24px; max-width: 900px; margin: 0 auto; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 64px; max-width: 520px; }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; }
+
+  /* a bigger magnetic target to feel the pull */
+  .big { font-size: 18px; padding: 22px 44px; }
+
+  /* a magnetic text link (no fill) to show the two-layer travel on its own */
+  .link.magnetic { text-transform: uppercase; text-decoration: none; font-size: clamp(20px, 4vw, 40px); font-weight: 600; display: inline-block; }
+  .link.magnetic:hover { color: var(--red); }
+
+  .group { margin-top: 12vh; }
+  .group h2 { text-transform: uppercase; font-size: 13px; color: var(--grey); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>13 <em class="slash"></em> Magnetic Buttons + Fill</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1>Buttons that reach back</h1>
+    <p class="hint">Move slowly toward each button. The shell follows your cursor,
+       the label leads it (two-layer <code>data-strength</code>), and the fill grows
+       from wherever you entered. Leave, and it springs home.</p>
+
+    <div class="btn-row">
+      <a class="btn magnetic big" data-strength="45" data-strength-text="75" href="#">
+        <span>Get in touch</span>
+      </a>
+      <a class="btn magnetic" data-strength="35" data-strength-text="60" href="#">
+        <span>View work</span>
+      </a>
+      <button class="btn magnetic" data-strength="35" data-strength-text="60">
+        <span>Play reel</span>
+      </button>
+    </div>
+
+    <div class="group">
+      <h2><span class="dot"></span>Magnetic on its own (text link, no fill)</h2>
+      <div class="btn-row">
+        <a class="link magnetic" data-strength="50" data-strength-text="90" href="#">Say hello →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="../lib/button-fill.js"></script>
+  <script src="../lib/magnetic.js"></script>
+  <script>
+    initButtonFill('.btn');   // fill only on the pill buttons
+    new Magnetic('.magnetic'); // magnetic on everything opted in
+  </script>
+</body>
+</html>
