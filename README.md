@@ -1,6 +1,6 @@
 # UI Animation Library
 
-Fourteen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne) and **[dennissnellenberg.com](https://dennissnellenberg.com)** — rebuilt in vanilla HTML/CSS/JS.
+Fifteen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne) and **[dennissnellenberg.com](https://dennissnellenberg.com)** — rebuilt in vanilla HTML/CSS/JS.
 
 ## Quick start
 
@@ -25,7 +25,8 @@ ui-animation-library/
 │   ├── equalizer.js            SoundEqualizer — dancing scaleY audio bars
 │   ├── nav-overlay.js          FullscreenNav — panel wipe + staggered items
 │   ├── magnetic.js             Magnetic — two-layer cursor pull (Snellenberg)
-│   └── button-fill.js          initButtonFill() — cursor-origin fill (Snellenberg)
+│   ├── button-fill.js          initButtonFill() — cursor-origin fill (Snellenberg)
+│   └── page-transition.js+css  initPageTransition() — wipe across page changes (Snellenberg)
 └── demos/                      ← one runnable page per pattern
     ├── 01-preloader.html
     ├── 02-cursor.html
@@ -39,7 +40,9 @@ ui-animation-library/
     ├── 10-studio-clock.html
     ├── 11-equalizer.html
     ├── 12-fullscreen-nav.html
-    └── 13-magnetic-buttons.html
+    ├── 13-magnetic-buttons.html
+    └── 14-page-transition.html (+ -b) — two linked pages
+
 ```
 
 ## Why the original site feels so good — the analysis
@@ -72,6 +75,7 @@ The quality comes from five principles, not from any single trick:
 | 12 | Fullscreen nav | Ink panel slides down `power4.inOut`, then ● dot + LABEL + red `/` items cascade with 0.06s stagger — one overlapped timeline so it reads as a single gesture |
 | 13 | Magnetic buttons | *(dennissnellenberg.com)* Shell follows the cursor by `data-strength`; the label leads it by `data-strength-text` — two layers read as depth; `elastic.out` snaps it home on leave |
 | 14 | Button fill | *(dennissnellenberg.com)* A circle scaled from 0 grows past the button bounds from the cursor's entry point; the label flips to the bg color as it's engulfed |
+| 15 | Page transition | *(dennissnellenberg.com)* An ink panel slides up to cover, the browser navigates *behind* it, then it keeps sliding up to reveal the next page — one wipe across a real page change. A `<head>` `pt-cover` snippet holds the destination covered before paint so there's no flash |
 
 ## Using a module in your own project
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 — Page Transition (A)</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/page-transition.css">
+<!-- zero-flash: cover the screen before first paint (skipped under reduced motion) -->
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+    document.documentElement.classList.add('pt-cover');
+</script>
+<style>
+  main { padding: 12vh 24px; max-width: 900px; margin: 0 auto; }
+  h1 { text-transform: uppercase; font-size: clamp(40px, 12vw, 140px); line-height: 0.9; letter-spacing: -0.03em; }
+  .hint { color: var(--grey); margin: 20px 0 48px; max-width: 520px; }
+  .links { display: flex; flex-wrap: wrap; gap: 28px; align-items: baseline; }
+  .go {
+    text-transform: uppercase; text-decoration: none; font-weight: 600;
+    font-size: clamp(18px, 3vw, 30px);
+    border-bottom: 2px solid var(--ink); padding-bottom: 4px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .go:hover { color: var(--red); border-color: var(--red); }
+  .small { font-size: 11px; color: var(--grey); text-transform: uppercase; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+  <div class="page-transition" aria-hidden="true"><span class="page-transition__label">Loading</span></div>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>14 <em class="slash"></em> Page Transition</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <p class="small"><span class="dot"></span>Page A</p>
+    <h1>Page<br>One</h1>
+    <p class="hint">Click through to Page Two. An ink panel slides up to cover the
+      screen, the browser navigates <em>behind</em> it, then the panel keeps
+      sliding up to reveal the next page — one continuous wipe across the page break,
+      no white flash between real HTML pages.</p>
+    <div class="links">
+      <a class="go" href="14-page-transition-b.html">Go to Page Two →</a>
+      <a class="go" href="../index.html">Back to Library</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="../lib/page-transition.js"></script>
+  <script> initPageTransition(); </script>
+</body>
+</html>
