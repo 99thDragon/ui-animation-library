@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16 — Text Roll</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { padding: 12vh 24px; max-width: 900px; margin: 0 auto; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 64px; max-width: 520px; }
+  .group { margin-bottom: 10vh; }
+  .group h2 { text-transform: uppercase; font-size: 11px; color: var(--grey); margin-bottom: 20px; }
+
+  .big { font-size: clamp(28px, 7vw, 72px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+  .rows { display: flex; flex-direction: column; gap: 10px; }
+  .row-link { display: block; }
+  .row-link:hover { color: var(--red); }
+
+  .nav-row { display: flex; gap: 32px; flex-wrap: wrap; text-transform: uppercase; font-size: 13px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>16 <em class="slash"></em> Text Roll</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1>Labels on a drum</h1>
+    <p class="hint">Hover any label. The characters roll up out of a mask while an
+      identical copy rolls up into place, each character delayed a little more than
+      the last — so it cascades instead of sliding as one block.</p>
+
+    <div class="group">
+      <h2><span class="dot"></span>Big links</h2>
+      <div class="rows big">
+        <a class="text-roll row-link" href="#">Selected work</a>
+        <a class="text-roll row-link" href="#">About the studio</a>
+        <a class="text-roll row-link" href="#">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2><span class="dot"></span>Nav-scale (tighter stagger)</h2>
+      <div class="nav-row">
+        <a class="text-roll nav-item" href="#">Home</a>
+        <a class="text-roll nav-item" href="#">Work</a>
+        <a class="text-roll nav-item" href="#">Archive</a>
+        <a class="text-roll nav-item" href="#">Contact</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="../lib/text-roll.js"></script>
+  <script>
+    initTextRoll('.row-link');              // default 18ms cascade
+    initTextRoll('.nav-item', { stagger: 10 });  // snappier for small type
+  </script>
+</body>
+</html>

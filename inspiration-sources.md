@@ -12,14 +12,14 @@ new ones. Tick a box once a site has been reviewed.
 
 ## Sites (newest → oldest)
 
-- [ ] [Osmo — Netherlands, Co-Founder, 2026](https://www.osmo.supply/)
-- [ ] [Thanks — Australia, 2025](https://www.thanks.co/)
+- [x] [Osmo — Netherlands, Co-Founder, 2026](https://www.osmo.supply/) — **mined 2026-07-26** → theme-switch (16), text-roll (17). Also seen: CSS-only marquee, Barba page transitions, lazy video (already have)
+- [x] [Thanks — Australia, 2025](https://www.thanks.co/) — **reviewed** → confirmed theme-section; also CSS accordion + pulse-button (not adopted)
 - [ ] [Truus — Netherlands, 2025](https://truus.co/)
 - [ ] [Dapper Agency — Netherlands, 2025](https://www.dapper.agency/)
 - [ ] [FlowFest 2025 — United Kingdom, 2025](https://www.flowfest.co.uk/)
 - [ ] [HNTRS® (GraphicHunters) — Netherlands, 2025](https://www.graphichunters.com/)
 - [ ] [Mews FM — United Kingdom, 2025](https://www.mews.fm/)
-- [ ] [KRAVT — Germany, 2025](https://www.kravt.eu/)
+- [x] [KRAVT — Germany, 2025](https://www.kravt.eu/) — **reviewed** → confirmed theme-section (13 of them) + `data-theme-nav`/`data-bg-nav`; sticky stacking sections noted as a future candidate
 - [ ] [Mews Unfold 2025 — Netherlands, 2025](https://mewsunfold.com/)
 - [ ] [FC88 — Netherlands, 2024](https://www.thisisfc88.com/)
 - [ ] [Hartmann Capital — United States, 2024](https://www.hartmanncapital.com/)
@@ -81,6 +81,19 @@ new ones. Tick a box once a site has been reviewed.
 
 ---
 
-_Source: dennissnellenberg.com/work (case studies) + /archive (direct live links).
-Already mined from his own site: magnetic buttons, button fill, page transition
-(patterns 13–15)._
+## Mining log
+
+| Date | Sites reviewed | Patterns added |
+|---|---|---|
+| 2026-07-26 | dennissnellenberg.com (own site) | 13 magnetic buttons · 14 button fill · 15 page transition |
+| 2026-07-26 | osmo.supply, thanks.co, kravt.eu | 16 scroll theme switch · 17 text roll |
+
+**Shared stack across his builds:** Webflow + GSAP + Lenis + Barba.js, no WebGL —
+all DOM/CSS, which is why these port cleanly to vanilla.
+
+**Candidates seen but not adopted yet:** sticky stacking sections (KRAVT),
+CSS-only marquee (Osmo — deliberately skipped, felt forced on the portfolio),
+CSS accordion + pulse button (Thanks), scramble/glitch text + scroll image
+sequence (hinted in Osmo's bundle, not confirmed visually).
+
+_Source: dennissnellenberg.com/work (case studies) + /archive (direct live links)._

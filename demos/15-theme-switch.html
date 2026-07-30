@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15 — Scroll Theme Switch</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  /* the nav floats over every section and recolors itself */
+  .fixed-nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 24px;
+    text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em;
+  }
+  .fixed-nav a { text-decoration: none; }
+  .fixed-nav .brand { font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  /* per-theme palette — the module only swaps data-theme-nav for you */
+  [data-theme-nav="light"] { color: var(--ink); }
+  [data-theme-nav="dark"]  { color: var(--bg); }
+
+  section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 12vh 24px; }
+  section[data-theme-section="light"] { background: var(--bg);  color: var(--ink); }
+  section[data-theme-section="dark"]  { background: var(--ink); color: var(--bg); }
+  section.is--red { background: var(--red); color: #fff; }
+
+  h2 { text-transform: uppercase; font-size: clamp(30px, 7vw, 82px); line-height: 0.95; letter-spacing: -0.03em; }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.6; margin-bottom: 16px; }
+  .note { max-width: 460px; margin-top: 18px; opacity: 0.75; }
+</style>
+</head>
+<body>
+
+  <nav class="fixed-nav" data-theme-nav="light">
+    <a class="brand" href="../index.html"><span class="nav-dot"></span>Library</a>
+    <span>Scroll — watch this bar recolor</span>
+  </nav>
+
+  <section data-theme-section="light">
+    <p class="label">Section 01 <em class="slash"></em> light</p>
+    <h2>The nav reads<br>the section</h2>
+    <p class="note">Each section declares <code>data-theme-section</code>. The bar above
+      checks which section sits under <em>its own centre line</em> and matches it —
+      so it stays legible without <code>mix-blend-mode</code> tricks that distort brand color.</p>
+  </section>
+
+  <section data-theme-section="dark">
+    <p class="label">Section 02 <em class="slash"></em> dark</p>
+    <h2>Inverted,<br>on cue</h2>
+    <p class="note">Crossing into an ink section flips the bar to the light palette,
+      transitioned over 0.4s with the kit's standard ease.</p>
+  </section>
+
+  <section data-theme-section="dark" class="is--red">
+    <p class="label">Section 03 <em class="slash"></em> dark (brand)</p>
+    <h2>Any background,<br>same rule</h2>
+    <p class="note">A loud brand panel still declares <code>dark</code> — the theme is a
+      contract about legibility, not a literal color.</p>
+  </section>
+
+  <section data-theme-section="light">
+    <p class="label">Section 04 <em class="slash"></em> light</p>
+    <h2>Back to paper</h2>
+    <p class="note">Found on osmo.supply, thanks.co and kravt.eu — every Snellenberg
+      build uses this. Scroll up and down to feel how exact the hand-off is.</p>
+  </section>
+
+  <script src="../lib/theme-switch.js"></script>
+  <script> initThemeSwitch({ nav: '.fixed-nav' }); </script>
+</body>
+</html>

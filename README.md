@@ -1,6 +1,6 @@
 # UI Animation Library
 
-Fifteen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne) and **[dennissnellenberg.com](https://dennissnellenberg.com)** — rebuilt in vanilla HTML/CSS/JS.
+Seventeen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne), **[dennissnellenberg.com](https://dennissnellenberg.com)**, and the client sites he builds (osmo.supply, thanks.co, kravt.eu) — rebuilt in vanilla HTML/CSS/JS.
 
 ## Quick start
 
@@ -26,7 +26,9 @@ ui-animation-library/
 │   ├── nav-overlay.js          FullscreenNav — panel wipe + staggered items
 │   ├── magnetic.js             Magnetic — two-layer cursor pull (Snellenberg)
 │   ├── button-fill.js          initButtonFill() — cursor-origin fill (Snellenberg)
-│   └── page-transition.js+css  initPageTransition() — wipe across page changes (Snellenberg)
+│   ├── page-transition.js+css  initPageTransition() — wipe across page changes (Snellenberg)
+│   ├── theme-switch.js         initThemeSwitch() — nav recolors per section (Osmo/Thanks/KRAVT)
+│   └── text-roll.js            initTextRoll() — label rolls out, duplicate rolls in (Osmo)
 └── demos/                      ← one runnable page per pattern
     ├── 01-preloader.html
     ├── 02-cursor.html
@@ -41,7 +43,9 @@ ui-animation-library/
     ├── 11-equalizer.html
     ├── 12-fullscreen-nav.html
     ├── 13-magnetic-buttons.html
-    └── 14-page-transition.html (+ -b) — two linked pages
+    ├── 14-page-transition.html (+ -b) — two linked pages
+    ├── 15-theme-switch.html
+    └── 16-text-roll.html
 
 ```
 
@@ -76,6 +80,8 @@ The quality comes from five principles, not from any single trick:
 | 13 | Magnetic buttons | *(dennissnellenberg.com)* Shell follows the cursor by `data-strength`; the label leads it by `data-strength-text` — two layers read as depth; `elastic.out` snaps it home on leave |
 | 14 | Button fill | *(dennissnellenberg.com)* A circle scaled from 0 grows past the button bounds from the cursor's entry point; the label flips to the bg color as it's engulfed |
 | 15 | Page transition | *(dennissnellenberg.com)* An ink panel slides up to cover, the browser navigates *behind* it, then it keeps sliding up to reveal the next page — one wipe across a real page change. A `<head>` `pt-cover` snippet holds the destination covered before paint so there's no flash |
+| 16 | Scroll theme switch | *(osmo.supply, thanks.co, kravt.eu — on **every** Snellenberg build)* Sections declare `data-theme-section="light\|dark"`; the fixed nav tests which section sits under **its own centre line** and sets `data-theme-nav` to match. Beats `mix-blend-mode` (which distorts brand color) and beats a two-state "scrolled" class |
+| 17 | Text roll | *(osmo.supply `data-button-rotate-hover`)* Two identical copies of the label in one `overflow:hidden` mask: on hover the first rolls up and out while the second rolls up into place, with a per-character `transition-delay` so it cascades rather than sliding as a slab |
 
 ## Using a module in your own project
 
