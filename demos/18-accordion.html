@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>18 — Accordion</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  main { padding: 12vh 24px 20vh; max-width: 760px; margin: 0 auto; }
+  h1 { text-transform: uppercase; font-size: clamp(28px, 5vw, 56px); margin-bottom: 8px; }
+  .hint { color: var(--grey); margin-bottom: 56px; max-width: 520px; }
+  .q { font-size: clamp(15px, 2vw, 20px); font-weight: 600; letter-spacing: 0.01em; }
+  /* Horizontal padding is fine, but vertical padding on the collapsing child
+     sets a minimum height the panel can never shrink below — so the bottom
+     gap is a spacer pseudo-element instead. */
+  .a { padding: 0 4px; color: var(--grey); max-width: 56ch; }
+  .a::after { content: ""; display: block; height: 26px; }
+  h2.group { text-transform: uppercase; font-size: 11px; color: var(--grey); margin: 8vh 0 12px; }
+</style>
+</head>
+<body>
+
+  <header class="demo-header">
+    <span><span class="dot"></span>18 <em class="slash"></em> Accordion</span>
+    <a href="../index.html">← Library</a>
+  </header>
+
+  <main>
+    <h1>0fr to 1fr</h1>
+    <p class="hint">The panels animate a CSS grid row from <code>0fr</code> to
+      <code>1fr</code>, so any content height eases correctly with zero JS
+      measurement — no <code>scrollHeight</code>, no breakage on resize.</p>
+
+    <div data-accordion>
+      <div data-accordion-item>
+        <button data-accordion-toggle><span class="q">Why not animate max-height?</span></button>
+        <div data-accordion-content><div class="a">Because you have to guess a value.
+          Too small clips the content, too large makes the easing feel wrong and the
+          panel appears to "wait". A fractional grid row is measured by the browser,
+          so the curve always matches the real height.</div></div>
+      </div>
+      <div data-accordion-item>
+        <button data-accordion-toggle><span class="q">Is it accessible?</span></button>
+        <div data-accordion-content><div class="a">The toggle is a real
+          <code>&lt;button&gt;</code> with <code>aria-expanded</code> and
+          <code>aria-controls</code>; the panel is a <code>region</code>. Keyboard
+          Enter/Space is wired for non-button toggles too.</div></div>
+      </div>
+      <div data-accordion-item>
+        <button data-accordion-toggle><span class="q">Where's the state?</span></button>
+        <div data-accordion-content><div class="a">On the item, as
+          <code>data-accordion-status="active"</code> — exactly like thanks.co and
+          flowfest.co.uk do it. CSS reads that one attribute and drives the panel
+          and the +/– indicator, so JS never touches styles.</div></div>
+      </div>
+    </div>
+
+    <h2 class="group"><span class="dot"></span>Independent (closeSiblings: false)</h2>
+    <div data-accordion class="multi">
+      <div data-accordion-item>
+        <button data-accordion-toggle><span class="q">Open me</span></button>
+        <div data-accordion-content><div class="a">These panels don't close each
+          other — useful for spec lists and filters.</div></div>
+      </div>
+      <div data-accordion-item>
+        <button data-accordion-toggle><span class="q">And me, together</span></button>
+        <div data-accordion-content><div class="a">Both can stay open at once.</div></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../lib/accordion.js"></script>
+  <script>
+    initAccordion({ container: '[data-accordion]:not(.multi)', openFirst: true });
+    initAccordion({ container: '.multi', closeSiblings: false });
+  </script>
+</body>
+</html>

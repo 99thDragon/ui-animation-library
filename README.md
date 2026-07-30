@@ -1,6 +1,6 @@
 # UI Animation Library
 
-Seventeen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne), **[dennissnellenberg.com](https://dennissnellenberg.com)**, and the client sites he builds (osmo.supply, thanks.co, kravt.eu) — rebuilt in vanilla HTML/CSS/JS.
+Nineteen UI/animation patterns reverse-engineered from **[thelinestudio.com](https://thelinestudio.com)** (design: Isaac Powell, dev: Thomas Aufresne), **[dennissnellenberg.com](https://dennissnellenberg.com)**, and the client sites he builds (osmo.supply, thanks.co, kravt.eu) — rebuilt in vanilla HTML/CSS/JS.
 
 ## Quick start
 
@@ -28,7 +28,9 @@ ui-animation-library/
 │   ├── button-fill.js          initButtonFill() — cursor-origin fill (Snellenberg)
 │   ├── page-transition.js+css  initPageTransition() — wipe across page changes (Snellenberg)
 │   ├── theme-switch.js         initThemeSwitch() — nav recolors per section (Osmo/Thanks/KRAVT)
-│   └── text-roll.js            initTextRoll() — label rolls out, duplicate rolls in (Osmo)
+│   ├── text-roll.js            initTextRoll() — label rolls out, duplicate rolls in (Osmo)
+│   ├── stacked-cards.js        initStackedCards() — sticky deck (FlowFest/KRAVT)
+│   └── accordion.js            initAccordion() — 0fr→1fr panels (Thanks/FlowFest)
 └── demos/                      ← one runnable page per pattern
     ├── 01-preloader.html
     ├── 02-cursor.html
@@ -45,7 +47,9 @@ ui-animation-library/
     ├── 13-magnetic-buttons.html
     ├── 14-page-transition.html (+ -b) — two linked pages
     ├── 15-theme-switch.html
-    └── 16-text-roll.html
+    ├── 16-text-roll.html
+    ├── 17-stacked-cards.html
+    └── 18-accordion.html
 
 ```
 
@@ -82,6 +86,8 @@ The quality comes from five principles, not from any single trick:
 | 15 | Page transition | *(dennissnellenberg.com)* An ink panel slides up to cover, the browser navigates *behind* it, then it keeps sliding up to reveal the next page — one wipe across a real page change. A `<head>` `pt-cover` snippet holds the destination covered before paint so there's no flash |
 | 16 | Scroll theme switch | *(osmo.supply, thanks.co, kravt.eu — on **every** Snellenberg build)* Sections declare `data-theme-section="light\|dark"`; the fixed nav tests which section sits under **its own centre line** and sets `data-theme-nav` to match. Beats `mix-blend-mode` (which distorts brand color) and beats a two-state "scrolled" class |
 | 17 | Text roll | *(osmo.supply `data-button-rotate-hover`)* Two identical copies of the label in one `overflow:hidden` mask: on hover the first rolls up and out while the second rolls up into place, with a per-character `transition-delay` so it cascades rather than sliding as a slab |
+| 18 | Stacked cards | *(flowfest.co.uk `data-stacked-cards`, kravt.eu)* Each card is `position: sticky` at `top + i*offset`, so scrolling deals them into a deck with every earlier top edge still showing. A pinned card's own top **equals** its stick point, so burial progress must be measured from the **next** card climbing over it — that's the non-obvious part. Scroll-linked scale/opacity carry **no** transition, or they smear behind the scroll |
+| 19 | Accordion | *(thanks.co, flowfest.co.uk `data-accordion-css-init`)* Panels animate `grid-template-rows: 0fr → 1fr`, so any content height eases correctly with zero JS measurement. Needs `min-height: 0` on the child or `0fr` never fully collapses — and vertical padding on that child sets a floor it can't shrink past |
 
 ## Using a module in your own project
 

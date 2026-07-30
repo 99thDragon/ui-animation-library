@@ -14,11 +14,11 @@ new ones. Tick a box once a site has been reviewed.
 
 - [x] [Osmo — Netherlands, Co-Founder, 2026](https://www.osmo.supply/) — **mined 2026-07-26** → theme-switch (16), text-roll (17). Also seen: CSS-only marquee, Barba page transitions, lazy video (already have)
 - [x] [Thanks — Australia, 2025](https://www.thanks.co/) — **reviewed** → confirmed theme-section; also CSS accordion + pulse-button (not adopted)
-- [ ] [Truus — Netherlands, 2025](https://truus.co/)
-- [ ] [Dapper Agency — Netherlands, 2025](https://www.dapper.agency/)
-- [ ] [FlowFest 2025 — United Kingdom, 2025](https://www.flowfest.co.uk/)
-- [ ] [HNTRS® (GraphicHunters) — Netherlands, 2025](https://www.graphichunters.com/)
-- [ ] [Mews FM — United Kingdom, 2025](https://www.mews.fm/)
+- [x] [Truus — Netherlands, 2025](https://truus.co/) — **reviewed** → theme-section ✓; new markers: `data-wiggle` (tags tilt on card hover), `data-clippath-transition` (hero video clip reveal), sticky cursor
+- [x] [Dapper Agency — Netherlands, 2025](https://www.dapper.agency/) — **reviewed** → **2 WebGL canvases** (only WebGL found so far; out of scope for a vanilla DOM library). No theme-section
+- [x] [FlowFest 2025 — United Kingdom, 2025](https://www.flowfest.co.uk/) — **mined** → stacked-cards (18) + accordion (19). Also `data-sticky-cursor-target`, CSS marquee
+- [x] [HNTRS® (GraphicHunters) — Netherlands, 2025](https://www.graphichunters.com/) — **reviewed** → 18 clip-path reveals, 115 marquee nodes, theme-nav ✓. Nothing new beyond clip-path reveal
+- [x] [Mews FM — United Kingdom, 2025](https://www.mews.fm/) — **reviewed** → **Howler.js** audio + `data-marquee-scroll-speed`/`-direction` (scroll-velocity-reactive marquee) + `data-infinite-sprite`
 - [x] [KRAVT — Germany, 2025](https://www.kravt.eu/) — **reviewed** → confirmed theme-section (13 of them) + `data-theme-nav`/`data-bg-nav`; sticky stacking sections noted as a future candidate
 - [ ] [Mews Unfold 2025 — Netherlands, 2025](https://mewsunfold.com/)
 - [ ] [FC88 — Netherlands, 2024](https://www.thisisfc88.com/)
@@ -87,13 +87,16 @@ new ones. Tick a box once a site has been reviewed.
 |---|---|---|
 | 2026-07-26 | dennissnellenberg.com (own site) | 13 magnetic buttons · 14 button fill · 15 page transition |
 | 2026-07-26 | osmo.supply, thanks.co, kravt.eu | 16 scroll theme switch · 17 text roll |
+| 2026-07-26 | truus.co, dapper.agency, flowfest.co.uk, graphichunters.com, mews.fm | 18 stacked cards · 19 accordion |
 
 **Shared stack across his builds:** Webflow + GSAP + Lenis + Barba.js, no WebGL —
 all DOM/CSS, which is why these port cleanly to vanilla.
 
-**Candidates seen but not adopted yet:** sticky stacking sections (KRAVT),
-CSS-only marquee (Osmo — deliberately skipped, felt forced on the portfolio),
-CSS accordion + pulse button (Thanks), scramble/glitch text + scroll image
-sequence (hinted in Osmo's bundle, not confirmed visually).
+**Candidates seen but not adopted yet:**
+- **Scroll-velocity marquee** (mews.fm) — marquee speed/direction driven by scroll velocity. Genuinely novel; parked because plain marquees were rejected on the portfolio as "forced".
+- **Clip-path media reveal** (truus.co `data-clippath-transition`, graphichunters.com — 18 nodes) — reveal media by animating `clip-path: inset()`. Adjacent to split-lines' masked reveal.
+- **Sticky cursor target** (flowfest.co.uk, truus.co) — cursor snaps to / wraps a hovered element, unlike our free-trailing `cursor.js`.
+- **WebGL shader canvas** (dapper.agency) — out of scope: the whole library is deliberately DOM/CSS so it ports anywhere.
+- Wiggle-on-hover tags (truus.co), pulse button (thanks.co), scramble text + scroll image sequence (hinted in Osmo's bundle, unconfirmed visually).
 
 _Source: dennissnellenberg.com/work (case studies) + /archive (direct live links)._
